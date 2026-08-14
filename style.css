@@ -1,0 +1,150 @@
+/* 全体の基本設定 */
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+/* メインコンテナ */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+/* カレンダー選択エリア */
+.date-picker-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e9ecef;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.date-picker-section input[type="date"] {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+}
+
+/* フォームのデザイン */
+#schedule-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* プルダウン選択（時・分）の横並びUI */
+.time-select-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+select,
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #ffffff;
+}
+
+select {
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* リストアイテムのデザイン */
+#schedule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  gap: 12px;
+}
+
+/* 完了状態（文字に取消線を引く） */
+.task-item.completed .task-title,
+.task-item.completed .task-time {
+  text-decoration: line-through;
+  color: #888888;
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.task-time {
+  font-weight: bold;
+  color: #007bff;
+  width: 60px;
+}
+
+.task-title {
+  flex-grow: 1;
+  word-break: break-all;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #bd2130;
+}

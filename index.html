@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デイリー・スケジュール管理</title>
+
+  <!-- PWA用の設定ファイルとテーマカラーを追加 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#007bff">
+  <link rel="apple-touch-icon" href="https://via.placeholder.com/192/007bff/ffffff?text=📅">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📅 スケジュール管理</h1>
+    
+    <!-- 日付選択エリア（カレンダー） -->
+    <div class="date-picker-section">
+      <label for="current-date">表示する日付:</label>
+      <input type="date" id="current-date">
+    </div>
+
+    <!-- タスク入力フォーム -->
+    <form id="schedule-form">
+      <div class="input-group">
+        <label>時間:</label>
+        <div class="time-select-group">
+          <select id="task-hour" required></select> 時
+          <select id="task-minute" required></select> 分
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="task-title">タスク内容:</label>
+        <input type="text" id="task-title" placeholder="例: ミーティング" required>
+      </div>
+      <button type="submit" id="add-btn">予定を追加</button>
+    </form>
+
+    <!-- スケジュール一覧表示エリア -->
+    <h2 id="list-title">選択中の予定</h2>
+    <ul id="schedule-list"></ul>
+  </div>
+
+  <script src="app.js"></script>
+
+  <!-- Service Workerの登録処理 -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker 登録成功'))
+        .catch(err => console.log('Service Worker 登録失敗:', err));
+    }
+  </script>
+</body>
+</html>
