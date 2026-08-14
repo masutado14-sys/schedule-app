@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. 時と分のプルダウン選択肢を動的に生成
   populateTimeOptions();
 
-  // 2. 本日の日付をカレンダーの初期値としてセット
-  const today = new Date().toISOString().split('T')[0];
+  // 2. ローカルの正確な「本日の日付（YYYY-MM-DD）」を取得してカレンダーにセット
+  const today = getTodayDateString();
   currentDateInput.value = today;
 
   // 3. 本日のタスクを読み込み
@@ -22,6 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // カレンダーの日付が変更されたときにタスク一覧を切り替え
 currentDateInput.addEventListener('change', refreshUI);
+
+// --- ローカルの今日の日付を「YYYY-MM-DD」形式で取得する関数（時差対策） ---
+function getTodayDateString() {
+  const now = new Date();
+  const year = now.getFullYear();
+  // 月は0から始まるため +1 し、2桁（例: 08）に揃える
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  // 日を2桁（例: 15）に揃える
+  const day = String(now.getDate()).padStart(2, '0');
+  
+  return `${year}-${month}-${day}`;
+}
 
 // --- 時間選択（時・分）の選択肢を作成する関数 ---
 function populateTimeOptions() {
@@ -43,7 +55,7 @@ function populateTimeOptions() {
     taskMinuteSelect.appendChild(option);
   });
 
-  // 初期値として「09:00」をセット（ビジネスの始業時間に合わせる）
+  // 初期値として「09:00」をセット
   taskHourSelect.value = '09';
   taskMinuteSelect.value = '00';
 }
@@ -53,7 +65,6 @@ scheduleForm.addEventListener('submit', function(e) {
   e.preventDefault();
 
   const selectedDate = currentDateInput.value;
-  // 選択された時と分を結合して「HH:MM」形式を作成
   const taskTime = `${taskHourSelect.value}:${taskMinuteSelect.value}`;
   const taskTitle = taskTitleInput.value;
 
@@ -68,7 +79,7 @@ scheduleForm.addEventListener('submit', function(e) {
   saveTask(newTask);
   refreshUI();
 
-  // タイトル入力のみクリア（時間は連続入力しやすいよう維持）
+  // タイトル入力のみクリア
   taskTitleInput.value = '';
 });
 
